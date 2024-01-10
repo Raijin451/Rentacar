@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Car>
+
+@{
+    ViewData["Title"] = "Araba Listesi";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Araba Ekle</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Yıl</th>
+            <th>Günlük Fiyat</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.PricePerDay</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-sm btn-info">Detaylar</a>
+                    <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-sm btn-danger" onclick="return confirm('Bu arabayı silmek istediğinizden emin misiniz?');">Sil</a>
+                    <!-- Kiralama Butonu -->
+                    <a asp-action="Rent" asp-route-id="@car.Id" class="btn btn-sm btn-success">Kirala</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
